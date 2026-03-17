@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build - ShiftSync UD Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: '#2563eb' },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-slate-800">
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 md:px-6">
+        <a href="index.html" class="flex items-center gap-2 font-semibold tracking-tight text-slate-900">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary" aria-hidden="true"
+            >SS</span
+          >
+          <span>ShiftSync UD</span>
+          <span class="hidden text-sm font-normal text-slate-500 md:inline">Build Tutorial</span>
+        </a>
+        <div class="flex flex-wrap items-center gap-2 text-sm">
+          <a href="index.html" class="rounded-md px-3 py-2 text-slate-700 hover:text-slate-900 hover:bg-slate-50">Introduction</a>
+          <a href="setup.html" class="rounded-md px-3 py-2 text-slate-700 hover:text-slate-900 hover:bg-slate-50">Setup</a>
+          <a
+            href="build.html"
+            aria-current="page"
+            class="rounded-md px-3 py-2 font-medium text-primary underline decoration-primary/40 underline-offset-8"
+            >Build</a
+          >
+          <a href="deploy.html" class="rounded-md px-3 py-2 text-slate-700 hover:text-slate-900 hover:bg-slate-50">Deploy</a>
+          <a href="reference.html" class="rounded-md px-3 py-2 text-slate-700 hover:text-slate-900 hover:bg-slate-50">Reference</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-4 py-10 md:px-6">
+      <section class="mb-10">
+        <p class="text-sm font-medium text-slate-500">Page 3 of 5</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">Build: generate your ShiftSync UD app</h1>
+        <p class="mt-4 text-lg leading-relaxed text-slate-700">
+          This is the exciting part: you’ll paste one “build prompt” into Cursor, and it will generate a full Next.js app structure for
+          ShiftSync UD—pages, database setup, login, and the core flows.
+        </p>
+      </section>
+
+      <section id="mental-model" class="mb-12">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Mental model: you’re the product manager</h2>
+        <p class="mt-3 leading-relaxed text-slate-700">
+          You’re not expected to write code from scratch. Your job is to describe what ShiftSync UD should do (like a product spec).
+          Cursor will act like an engineering team and produce files. You then test the app and ask Cursor to fix issues.
+        </p>
+        <div class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-6">
+          <p class="text-sm font-medium text-slate-900">A practical workflow you’ll repeat a lot</p>
+          <ol class="mt-2 list-decimal pl-5 text-sm text-slate-700">
+            <li><span class="font-medium text-slate-900">Describe</span> what you want (prompt).</li>
+            <li><span class="font-medium text-slate-900">Run</span> the app locally.</li>
+            <li><span class="font-medium text-slate-900">Observe</span> what’s working / what’s broken.</li>
+            <li><span class="font-medium text-slate-900">Paste errors</span> into Cursor and ask it to fix them.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="project-folder" class="mb-12">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">1) Create a project folder</h2>
+        <p class="mt-3 leading-relaxed text-slate-700">
+          Why: keeping one folder per project prevents “mystery files” and makes it easy to deploy. Use a simple name with dashes (no
+          spaces), like <span class="font-medium text-slate-900">shiftsync-ud</span>.
+        </p>
+        <ol class="mt-4 list-decimal pl-5 text-slate-700">
+          <li>Create a folder on your Desktop or Documents.</li>
+          <li>Open Cursor → File → Open Folder → choose that folder.</li>
+          <li>You should see an empty folder in the sidebar.</li>
+        </ol>
+      </section>
+
+      <section id="build-prompt" class="mb-12">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">2) Copy the ShiftSync UD build prompt into Cursor</h2>
+        <p class="mt-3 leading-relaxed text-slate-700">
+          Before you do this, grab your InstantDB App ID (from <a class="text-primary underline" href="https://instantdb.com/dash">instantdb.com/dash</a>).
+          You’ll replace <span class="font-medium text-slate-900">YOUR_APP_ID_HERE</span> in the prompt.
+        </p>
+
+        <div class="mt-6 rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-slate-900">Steps</h3>
+          <ol class="mt-2 list-decimal pl-5 text-slate-700">
+            <li>Open Cursor’s Composer (Ctrl+I on Windows).</li>
+            <li>Paste the prompt below.</li>
+            <li>Replace <span class="font-medium text-slate-900">YOUR_APP_ID_HERE</span> with your InstantDB App ID.</li>
+            <li>Press Enter and let Cursor generate files.</li>
+          </ol>
+        </div>
+
+        <div class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-6">
+          <p class="text-sm font-medium text-slate-900">ShiftSync UD Build Prompt (copy/paste)</p>
+          <p class="mt-2 text-sm text-slate-700">
+            Tip: this is intentionally detailed. The goal is to reduce back-and-forth and get a working first version fast.
+          </p>
+          <pre class="mt-4"><code class="language-markdown">Build me a Next.js web application. Here are the complete specifications:
+
+## Tech Stack (DO NOT DEVIATE)
+- Next.js 14+ with App Router (not Pages Router)
+- TypeScript
+- Tailwind CSS for styling
+- InstantDB for database and authentication (use @instantdb/react)
+
+## InstantDB Configuration
+My InstantDB App ID is: YOUR_APP_ID_HERE
+
+Initialize InstantDB in a file at `src/lib/db.ts` like this:
+```typescript
+import { init } from '@instantdb/react';
+import schema from '../../instant.schema';
+
+const APP_ID = 'YOUR_APP_ID_HERE';
+
+export const db = init({
+  appId: APP_ID,
+  schema
+});
+```
+
+## App Description
+ShiftSync UD is a shift-management app for UD Catering student servers and student managers. Servers create a profile (including uniform size and manager notes), submit weekly availability in a grid, and view their assigned shifts. When a server can’t make a shift, they post a swap request; eligible servers can claim it; managers approve or deny the swap and the published schedule updates automatically—no email threads.
+
+## Data Model
+Create an InstantDB schema in `instant.schema.ts` with these entities (keep it beginner-friendly and within 2–4 core entities; use links for relationships):
+
+- `profiles`
+  - displayName (string)
+  - contact (string) // phone or email to help managers reach them
+  - uniformSize (string) // one of XS, S, M, L, XL, XXL
+  - notes (string) // freeform info managers should know
+  - role (string) // "server" | "manager"
+
+- `availabilityBlocks`
+  - dayOfWeek (string) // "Mon"..."Sun"
+  - timeBlock (string) // "morning" | "afternoon" | "evening"
+  - isAvailable (boolean)
+
+- `shifts`
+  - eventName (string)
+  - date (date)
+  - timeBlock (string) // "morning" | "afternoon" | "evening"
+  - location (string)
+  - meetupDetails (string)
+  - status (string) // "draft" | "published"
+
+- `swapRequests`
+  - status (string) // "open" | "claimed" | "approved" | "denied"
+  - createdAt (date)
+
+Relationships (InstantDB links):
+- Each `profile` belongs to exactly one `$users` user.
+- Each `availabilityBlock` belongs to exactly one `profile`.
+- Each `shift` can have many assigned `profiles` (start simple: assign 1 server per shift in V1; structure code so it can be extended to multiple later).
+- Each `swapRequest` belongs to exactly one `shift` and has:
+  - `fromProfile` (the person dropping the shift)
+  - `toProfile` (optional; the person claiming it)
+
+## Permissions (InstantDB)
+Create `instant.perms.ts` with permissions that are correct and safe, but not overly complex for a first app:
+- Only authenticated users can read/write data.
+- A user can create and update their own `profile`.
+- A user can create and update their own `availabilityBlocks`.
+- Servers can read `shifts` that are assigned to them.
+- Servers can create a `swapRequest` only for a `shift` assigned to them.
+- Servers can read open `swapRequests` (we will filter to “relevant to me” in the UI for V1).
+- Managers (role="manager") can read all `profiles`, `availabilityBlocks`, `shifts`, and `swapRequests`, and can approve/deny swap requests.
+
+If something is not possible to enforce perfectly in perms without lots of complexity, enforce it in the UI for V1 and explain the tradeoff in code only when necessary.
+
+## Authentication
+Implement user authentication using InstantDB's Magic Code flow:
+1. Use `db.useAuth()` to check login status
+2. User enters email
+3. InstantDB sends a 6-digit magic code
+4. User enters code to finish login
+5. Protect routes that require authentication (redirect to /login)
+
+## Pages to Create (App Router)
+- `/` Home dashboard (requires auth): role-aware landing page
+  - If server: quick links to Profile, Availability, My Schedule, Swap Board
+  - If manager: quick links to Manager Schedule Builder + Approvals
+- `/login` Login page with Magic Code flow
+- `/profile` Profile create/edit page (requires auth)
+- `/availability` Weekly availability grid page (requires auth)
+- `/schedule` Server page: "My Schedule + Swap Board" (requires auth)
+  - Show assigned shifts
+  - Allow posting a swap request for a shift
+  - Show open swap requests that match my availability (client-side filtering)
+  - Allow claiming a swap request
+- `/manager` Manager Schedule Builder (requires auth, manager-only)
+  - Create shifts/events for the week (eventName, date, timeBlock, location, meetupDetails)
+  - Assign a server to a shift (choose from profiles; show uniform size + notes for convenience)
+  - Publish shifts (set status="published")
+  - Show pending swap requests and allow approve/deny
+
+## Core Features (MVP)
+1. Magic Code login (no passwords)
+2. Profile creation with uniform size + manager notes
+3. Availability grid that saves to InstantDB
+4. Server schedule view (assigned shifts)
+5. Swap board: post swap requests, claim swaps, manager approve/deny, schedule updates
+6. Manager schedule builder: create shifts and assign servers
+
+## UI Requirements
+- Clean, modern Tailwind UI (mobile responsive)
+- Clear navigation between pages (top nav or sidebar)
+- Loading states while queries load
+- Error messages when something fails
+- Use reusable components where sensible (e.g., Layout/Nav, Button, Card)
+
+## File Structure (must follow)
+src/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── login/
+│   │   └── page.tsx
+│   ├── profile/
+│   │   └── page.tsx
+│   ├── availability/
+│   │   └── page.tsx
+│   ├── schedule/
+│   │   └── page.tsx
+│   └── manager/
+│       └── page.tsx
+├── components/
+│   └── (reusable components)
+└── lib/
+    └── db.ts
+instant.schema.ts
+instant.perms.ts
+
+## Getting Started Steps (must include)
+1. Create the Next.js app in the current folder:
+   `npx create-next-app@latest . --tailwind --eslint --app --src-dir --import-alias \"@/*\" --typescript`
+2. Install InstantDB:
+   `npm install @instantdb/react`
+3. Create the schema and permissions files and push them using InstantDB CLI commands that are appropriate for InstantDB.
+4. Ensure the app runs locally: `npm run dev`
+
+Please create all necessary files with complete, working code and no placeholders.</code></pre>
+        </div>
+      </section>
+
+      <section id="run-locally" class="mb-12">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">3) Run your app locally</h2>
+        <p class="mt-3 leading-relaxed text-slate-700">
+          Mental model: running locally is like a “practice kitchen” on your own laptop. It’s not on the internet yet—only your computer
+          can see it.
+        </p>
+        <ol class="mt-4 list-decimal pl-5 text-slate-700">
+          <li>In Cursor, open the terminal (View → Terminal).</li>
+          <li>Run:</li>
+        </ol>
+        <pre class="mt-4"><code class="language-bash">npm run dev</code></pre>
+        <p class="mt-3 leading-relaxed text-slate-700">
+          Then open <span class="font-medium text-slate-900">http://localhost:3000</span>.
+        </p>
+
+        <div class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="font-semibold text-slate-900">What is “localhost”?</h3>
+          <p class="mt-2 text-slate-700">
+            <span class="font-medium text-slate-900">localhost</span> is a special address that means “this computer.” The <span class="font-medium">:3000</span>
+            part is like a specific door number. Your app is temporarily using door 3000 on your laptop.
+          </p>
+        </div>
+      </section>
+
+      <section id="what-to-expect" class="mb-12">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">4) What to expect (and how to handle issues)</h2>
+        <p class="mt-3 leading-relaxed text-slate-700">
+          It’s normal for the first run to have a few bumps. The skill you’re building is not “memorize syntax”—it’s learning how to
+          iterate: run → see error → ask Cursor to fix → repeat.
+        </p>
+        <div class="mt-6 rounded-xl border border-slate-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-slate-900">If something breaks, do this</h3>
+          <ol class="mt-2 list-decimal pl-5 text-slate-700">
+            <li>Copy the full error message (from the terminal or browser).</li>
+            <li>Paste it into Cursor and say: <span class="font-medium text-slate-900">“I’m getting this error. Please fix it.”</span></li>
+            <li>Let Cursor apply the fix, then run <span class="font-medium">npm run dev</span> again.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="mb-6">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-6">
+          <h2 class="text-xl font-semibold text-slate-900">Next: deploy your app to Vercel</h2>
+          <p class="mt-2 text-slate-700">
+            Once it works locally, you’ll push it to GitHub and Vercel will put it on the internet.
+          </p>
+          <a
+            href="deploy.html"
+            class="mt-4 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
+            >Go to Deploy →</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="mx-auto max-w-3xl px-4 py-8 text-sm text-slate-500 md:px-6">
+        <p>
+          Reminder: email sending beyond Magic Code login is out of scope for this bootcamp. ShiftSync UD’s “notifications” are in-app
+          for V1.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-tsx.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
+
